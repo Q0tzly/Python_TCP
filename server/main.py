@@ -78,7 +78,7 @@ def ip_port():
       print("please write ip")
       server_ip = input(": ")
       print("please write port")
-      server_port = input(": ")
+      server_port = int(input(": "))
       return (server_ip, server_port)
 
     else:
