@@ -1,0 +1,6 @@
+version: '3'
+services:
+  tcp_chat_server:
+    build: .
+    ports:
+    - 9090:9090

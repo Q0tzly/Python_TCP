@@ -64,30 +64,9 @@ def accept_clients():
         client_handler.start()
         print(f"[*] Accepted connection from: {client_ip}")
 
-def ip_port():
-    server_ip = "127.0.0.1"
-    server_port = 9090
-
-    print("please choose default:(d) or your setting:(s)")
-    choose = input(": ")
-
-    if choose == "d":
-      return (server_ip, server_port)
-
-    elif choose == "s":
-      print("please write ip")
-      server_ip = input(": ")
-      print("please write port")
-      server_port = int(input(": "))
-      return (server_ip, server_port)
-
-    else:
-      return ip_port()
-
 # サーバーの設定
-ip_port_tmp = ip_port()
-server_ip = ip_port_tmp[0]
-server_port = ip_port_tmp[1]
+server_ip = "127.0.0.1"
+server_port = 9090
 
 tcp_server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 tcp_server.bind((server_ip, server_port))
