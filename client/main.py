@@ -10,13 +10,34 @@ def receive_messages(client_socket, client_address):
             message = data.decode()
             # クライアント自身が送信したメッセージを除外
             if not message.startswith(f"{client_address[0]}:{client_address[1]}:"):
-                print(message)
+                print(message + "\n: ")
     except ConnectionResetError:
         print("[*] Connection closed by server")
 
-def main():
+def ip_port():
     server_ip = "127.0.0.1"
     server_port = 9090
+
+    print("please choose default:(d) or your setting:(s)")
+    choose = input(": ")
+
+    if choose == "d":
+      return (server_ip, server_port)
+
+    elif choose == "s":
+      print("please write ip")
+      server_ip = input(": ")
+      print("please write port")
+      server_port = input(": ")
+      return (server_ip, server_port)
+
+    else:
+      return ip_port()
+
+def main():
+    ip_port_tmp = ip_port()
+    server_ip = ip_port_tmp[0]
+    server_port = ip_port_tmp[1]
 
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.connect((server_ip, server_port))
@@ -29,7 +50,7 @@ def main():
 
     print("Enter a message ('exit' to quit)")
     while True:
-        message = input()
+        message = input(": ")
         if message == "exit":
             client_socket.send(message.encode())
             break
